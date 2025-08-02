@@ -1,5 +1,5 @@
 #include "umrt-emb-imu-ros/imu_node.hpp"
-#include <time.hpp> 
+#include <ctime> 
 
 
 ImuNode::ImuNode() : Node("imu") {
@@ -7,9 +7,9 @@ ImuNode::ImuNode() : Node("imu") {
     this->declare_parameter("slave_addr", 0x28); 
     this->declare_parameter("polling_freq",100); 
     
-    std::string i2c_addr{this->get_parameter("i2c_addr")}; 
-    uint8_t slave_addr{this->get_parameter("slave_addr"); 
-    int polling_freq{this -> get_parameter("polling_freq")}; 
+    std::string i2c_addr{(this->get_parameter("i2c_addr")).as_string()}; 
+    uint8_t slave_addr{this->get_parameter("slave_addr").as_int()}; 
+    long int polling_freq{this -> get_parameter("polling_freq").as_int()}; 
     
     timer_duration = std::chrono::duration<int, std::milli>(polling_freq); 
     imu_publisher = create_publisher<sensor_msgs::msg::Imu>("imu_data",10); 
