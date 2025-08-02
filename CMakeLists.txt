@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(********** Fill in project name **********)
+project(umrt-emb-imu-ros)
 
 set(CMAKE_CXX_STANDARD 14)
 
@@ -14,17 +14,20 @@ include_directories(SYSTEM /opt/ros/$ENV{ROS_DISTRO}/include)
 set(THIS_PACKAGE_INCLUDE_DEPENDS
         rclcpp
         rclcpp_lifecycle
+        sensor_msgs
+        umrt-imu-interface
         )
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(Boost REQUIRED COMPONENTS system)
 foreach(Dependency IN ITEMS ${THIS_PACKAGE_INCLUDE_DEPENDS})
   find_package(${Dependency} REQUIRED)
 endforeach()
 
 add_executable(${PROJECT_NAME}
-    src/project_name.cpp
-    src/example_node.cpp
+    src/umrt-emb-imu-ros.cpp
+    src/imu_node.cpp
 )
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 target_include_directories(${PROJECT_NAME} PUBLIC
@@ -34,6 +37,11 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 ament_target_dependencies(
         ${PROJECT_NAME} PUBLIC
         ${THIS_PACKAGE_INCLUDE_DEPENDS}
+)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    umrt-imu-interface::umrt-imu-interface  
+    Boost::system 
 )
 
 # Parse version number from the file
