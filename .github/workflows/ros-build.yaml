@@ -13,9 +13,9 @@ jobs:
 
     uses: UMRoboticsTeam/umrt-ci-cd/.github/workflows/ros-build.yaml@main
     with:
-      build_image: ghcr.io/umroboticsteam/umrt-build:v0.0.28
+      build_image: ghcr.io/umroboticsteam/umrt-build:v0.0.16
       publish_image: ghcr.io/umroboticsteam/umrt-apt-image:latest
-      publish_repo: UMRoboticsTeam/umrt-emb-imu-ros
+      publish_repo: UMRoboticsTeam/umrt-apt-repo
     secrets:
       APT_SIGNING_PUBKEY: ${{ secrets.APT_SIGNING_PUBKEY }}
       APT_SIGNING_KEY: ${{ secrets.APT_SIGNING_KEY }}
