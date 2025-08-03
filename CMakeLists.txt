@@ -21,6 +21,7 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system)
+find_package(Threads REQUIRED )
 foreach(Dependency IN ITEMS ${THIS_PACKAGE_INCLUDE_DEPENDS})
   find_package(${Dependency} REQUIRED)
 endforeach()
@@ -42,6 +43,7 @@ ament_target_dependencies(
 target_link_libraries(${PROJECT_NAME} PRIVATE
     umrt-imu-interface::umrt-imu-interface  
     Boost::system 
+    Threads::Threads
 )
 
 # Parse version number from the file
