@@ -3,7 +3,7 @@
 
 
 ImuNode::ImuNode() : Node("imu") {
-    this->declare_parameter("i2c_addr", "/dev/12c-1"); 
+    this->declare_parameter("i2c_addr", "/dev/i2c-1"); 
     this->declare_parameter("slave_addr", 0x28); 
     this->declare_parameter("polling_freq",100); 
     
